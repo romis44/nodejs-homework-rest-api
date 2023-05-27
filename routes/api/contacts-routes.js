@@ -20,26 +20,26 @@ const { authenticate } = require("../../middlewares");
 
 const router = express.Router();
 
-// router.use(authenticate);
+router.use(authenticate);
 
-router.get("/", authenticate, getAllContacts);
+router.get("/", getAllContacts);
 
-router.get("/:contactId", authenticate, getContactsById);
+router.get("/:contactId", getContactsById);
 
-router.post("/", authenticate, validateBody(contactsAddSchema), addContact);
+router.post("/", validateBody(contactsAddSchema), addContact);
 
-router.delete("/:contactId", authenticate, removeContact);
+router.delete("/:contactId", removeContact);
 
 router.patch(
   "/:contactId/favorite",
-  authenticate,
+
   validateBody(updateFavoriteSchema),
   updateStatusContact
 );
 
 router.put(
   "/:contactId",
-  authenticate,
+
   validateBody(contactsAddSchema),
   updateContact
 );
