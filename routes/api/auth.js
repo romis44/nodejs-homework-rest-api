@@ -10,7 +10,7 @@ const {
   updateSubscriptionSchema,
 } = require("../../schemas/userSchemas");
 
-const { authenticate } = require("../../middlewares");
+const { authenticate, upload } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -27,6 +27,13 @@ router.patch(
   authenticate,
   validateBody(updateSubscriptionSchema),
   ctrl.updateSubscription
+);
+
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  ctrl.updateAvatar
 );
 
 module.exports = { authRouter: router };
